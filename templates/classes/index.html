@@ -1,0 +1,241 @@
+{% extends "layouts/main.html" %} {%block title%} Danh Sách Lớp Học {%endblock%}
+{% block content %}
+<div class="content-wrapper" style="min-height: 1302.12px">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Danh Sách Lớp Học</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div
+    class="modal fade show close-button-model"
+    id="modal-confirm"
+    style="padding-right: 17px"
+    aria-modal="true"
+    role="dialog"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Warning!</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true"> </span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Bạn có muốn xóa ...</p>
+        </div>
+        <div class="modal-footer justify-content-between" id="confirm_action">
+          <button
+            class="btn btn-primary close"
+            data-dismiss="modal"
+            aria-label="Close"
+            id="confirm_delete"
+          >
+            Yes
+          </button>
+          <button class="btn btn-default close-button" id="cancel_delete">
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade show close-button-model"
+    id="modal_confirm_move"
+    style="padding-right: 17px"
+    aria-modal="true"
+    role="dialog"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Info!</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true"> </span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Bạn có muốn move hoc sinh sang lop khac</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button class="btn btn-primary close-button" id="confirm_delete">
+            Yes
+          </button>
+          <button class="btn btn-default close-button" id="cancel_delete">
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade show close-button-model"
+    id="modal_chosse_new_class"
+    style="padding-right: 17px"
+    aria-modal="true"
+    role="dialog"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Warning!</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true"> </span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Chọn lớp muốn chuyển</p>
+          <select id="choose_new_class">
+            {% for class in dataClasses %}
+            <option value="{{class.id}}" data-value="{{class.id}}">
+              {{class.name}}
+            </option>
+            {%endfor%}
+          </select>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button class="btn btn-primary close-button" id="confirm_delete">
+            Yes
+          </button>
+          <button class="btn btn-default close-button" id="cancel_delete">
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Lớp Học</h3>
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px">
+                  <input
+                    type="text"
+                    name="table_search"
+                    class="form-control float-right"
+                    placeholder="Search"
+                  />
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Class</th>
+                    <th>Form Teacher</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    {% for class in dataClasses %}
+                    <td>{{class.id}}</td>
+                    <td>{{class.name}}</td>
+                    <td>{{class.teachers_name}}</td>
+                    <td>
+                      <a href="/classes/edit/{{class.id}}">Sửa</a> /
+                      <a href="#" class="delete" data-id="{{class.id}}">Xóa</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %} {%block custom_script %}
+<script>
+  // $(function () {
+  $("tbody.action a.delete").on("click", function (e) {
+    let dataId = $(this).data("id");
+    $.post("/classes/delete/" + dataId + "/1", function (data) {
+      if (data.status == "faild") {
+        $("#confirm_action button").attr("data-id", data.current_class_id);
+        $("#modal-confirm").show();
+      } else {
+        $("#modal_confirm_move button").attr("data-id", data.current_class_id);
+        $("#modal_confirm_move").show();
+      }
+    });
+  });
+  $("button.close-button").click(function () {
+    $(".close-button-model").hide();
+  });
+  // click yes corfirm delete
+  $("#confirm_action button#confirm_delete").click(function () {
+    let dataId = $(this).data("id");
+    console.log(dataId);
+    $.post(
+      "/classes/delete/" + dataId + "/2",
+      { has_student: 0 },
+      function (data) {
+        if (data.status == "faild") {
+          $("#modal-confirm").show();
+        }
+      }
+    );
+    location.reload();
+  });
+  // click yes move modal
+  $("#modal_confirm_move button#confirm_delete").click(function () {
+    $("#modal_chosse_new_class").show();
+    $(
+      "#modal_chosse_new_class select option[value=" + $(this).data("id") + "]"
+    ).remove();
+    $("#modal_chosse_new_class button").attr("data-id", $(this).data("id"));
+  });
+  // click yes choose modal
+  $("#modal_chosse_new_class button#confirm_delete").click(function () {
+    let new_id = $("#choose_new_class").val();
+    let current_class_id = $(this).data("id");
+    $.post(
+      "/classes/delete/" + current_class_id + "/2",
+      { has_student: 1, new_id: new_id },
+      function (data) {}
+    );
+    location.reload();
+  });
+  $("#modal_chosse_new_class button#cancel_delete").click(function () {
+    location.reload();
+  });
+  // });
+</script>
+{%endblock%}

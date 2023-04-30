@@ -1,0 +1,148 @@
+<div class="sidebar">
+  <!-- Sidebar user (optional) -->
+  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="info">
+      <a href="#" class="d-block">Quản Lý Trường Học</a>
+    </div>
+  </div>
+
+  <!-- SidebarSearch Form -->
+  <div class="form-inline">
+    <div class="input-group" data-widget="sidebar-search">
+      <input
+        class="form-control form-control-sidebar"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <div class="input-group-append">
+        <button class="btn btn-sidebar">
+          <i class="fas fa-search fa-fw"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <nav class="mt-2">
+    <ul
+      class="nav nav-pills nav-sidebar flex-column"
+      data-widget="treeview"
+      role="menu"
+      data-accordion="false"
+    >
+      <li class="nav-item menu-open">
+        <a
+          href="/"
+          class="nav-link {% if current_url == '/students' or current_url == '/add' %} active {% endif %}"
+        >
+          <p>
+            SINH VIÊN
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a
+              href="/students/add"
+              class="nav-link {% if current_url == '/add' %} active {% endif %}"
+            >
+              <i class="far fa-circle nav-icon"></i>
+              <p>Thêm sinh viên</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              href="/students"
+              class="nav-link {% if current_url == '/students' %} active {% endif %}"
+            >
+              <i class="far fa-circle nav-icon"></i>
+              <p>Danh sách sinh viên</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <ul
+      class="nav nav-pills nav-sidebar flex-column"
+      data-widget="treeview"
+      role="menu"
+      data-accordion="false"
+    >
+      <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+      <li class="nav-item menu-open">
+        <a
+          href="/teachers"
+          class="nav-link {% if current_url == '/teachers' or current_url == '/teachers/add' %} active {% endif %}"
+        >
+          <p>
+            GIÁO VIÊN
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a
+              href="/teachers/add"
+              class="nav-link {% if current_url == '/teachers/add' %} active {% endif %}"
+            >
+              <i class="far fa-circle nav-icon"></i>
+              <p>Thêm giáo viên</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              href="/teachers"
+              class="nav-link {% if current_url == '/teachers' %} active {% endif %}"
+            >
+              <i class="far fa-circle nav-icon"></i>
+              <p>Danh sách giáo viên</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <ul
+      class="nav nav-pills nav-sidebar flex-column"
+      data-widget="treeview"
+      role="menu"
+      data-accordion="false"
+    >
+      <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+      <li class="nav-item menu-open">
+        <a
+          href="/classes"
+          class="nav-link {% if current_url == '/classes' or current_url == '/classes/add' %} active {% endif %}"
+        >
+          <p>
+            LỚP HỌC
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a
+              href="/classes/add"
+              class="nav-link {% if current_url == '/classes/add' %} active {% endif %}"
+            >
+              <i class="far fa-circle nav-icon"></i>
+              <p>Thêm lớp học</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              href="/classes"
+              class="nav-link {% if current_url == '/classes' %} active {% endif %}"
+            >
+              <i class="far fa-circle nav-icon"></i>
+              <p>Danh sách lớp học</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.sidebar-menu -->
+</div>

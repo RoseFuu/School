@@ -1,0 +1,77 @@
+{% extends "layouts/main.html" %} {%block title%} Danh Sách Giáo Viên
+{%endblock%} {% block content %}
+<div class="content-wrapper" style="min-height: 1302.12px">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Danh Sách Giáo Viên</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Giáo Viên</h3>
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px">
+                  <input
+                    type="text"
+                    name="table_search"
+                    class="form-control float-right"
+                    placeholder="Search"
+                  />
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Age</th>
+                    <th>Address</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    {% for teachers in dataTeacher %}
+                    <td>{{teachers.id}}</td>
+                    <td>{{teachers.name}}</td>
+                    <td>{{teachers.classes_name}}</td>
+                    <td>{{teachers.age}}</td>
+                    <td>{{teachers.address}}</td>
+                    <td>{{teachers.telephone}}</td>
+                    <td>{{teachers.email}}</td>
+                    <td>{{teachers.subject}}</td>
+                    <td>
+                      <a href="/teachers/edit/{{ teachers.id }}">Sửa</a> /
+                      <a href="/teachers/delete/{{ teachers.id }}">Xóa</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
