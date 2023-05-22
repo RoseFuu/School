@@ -20,7 +20,7 @@ block content %}
               <h3 class="card-title">Sinh Viên</h3>
             </div>
 
-            <form id="quickForm" novalidate="novalidate" method="POST">
+            <form id="quickForm" novalidate="novalidate" method="POST" enctype="multipart/form-data">
               <div class="card-body">
 
                 <div class="form-group">
@@ -99,6 +99,18 @@ block content %}
                     placeholder="Enter email"
                     value="{{data.email}}"
                   />
+                </div>
+                {% if data.img %}
+                <img src="/static/uploads/{{data.img}}" width="150px" alt="">
+                {% endif %}
+                <div class="form-group">
+                  <label for="exampleFormControlFile1">Thay ảnh của bạn</label>
+                    <input
+                      type="file"
+                      class="form-control-file"
+                      name="file"
+                      id="exampleFormControlFile1"
+                    />
                 </div>
               </div>
 

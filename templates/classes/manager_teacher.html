@@ -1,0 +1,103 @@
+{% extends "layouts/main.html" %} {%block title%} Quản Lý Giáo Viên Bộ Môn
+{%endblock%} {% block content %}
+<div class="content-wrapper" style="min-height: 1302.12px">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Quản Lý Giáo Viên Bộ Môn</h1>
+        </div>
+        <div class="col-sm-6">
+          <h1>Lớp {{dataClass.name}}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Giáo Viên</h3>
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px">
+                  <input
+                    type="text"
+                    name="table_search"
+                    class="form-control float-right"
+                    placeholder="Search"
+                  />
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Subject</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    {% for teachers in dataTeacher %}
+                    <td>{{teachers.id}}</td>
+                    <td>{{teachers.name}}</td>
+                    <td>{{teachers.subject}}</td>
+                    <td>
+                      {% if teachers.status %}Đang Dạy{% else %}Không Dạy{%
+                      endif %}
+                    </td>
+                    <td>
+                      <button
+                        class="change id_button"
+                        class="btn btn-primary"
+                        id="id_button"
+                        data-teacher="{{teachers.id}}"
+                        data-status="{{teachers.status}}"
+                        data-class="{{dataClass.id}}"
+                      >
+                        {% if teachers.status %}Gỡ{% else %}Thêm{% endif %}
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %} {%block custom_script %}
+<script>
+  $(".change").click(function () {
+    let current = $(this);
+    let status = $(this).data("status");
+    let teacher = $(this).data("teacher");
+    let class_id = $(this).data("class");
+    console.log("Data Loaded: " + teacher, status, class_id);
+
+    $.post("/classes/manager/teacher", { teacher, status, class_id }).done(
+      function (data) {
+        current.html(data["newtext"]);
+        current.attr("data-status", data.status);
+        current.data("status", data.status);
+        current.parent().prev().html(data["newstatus"]);
+      }
+    );
+  });
+</script>
+{%endblock%}

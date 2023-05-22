@@ -161,14 +161,17 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for class in dataClasses %}
                   <tr>
-                    {% for class in dataClasses %}
                     <td>{{class.id}}</td>
                     <td>{{class.name}}</td>
                     <td>{{class.teachers_name}}</td>
                     <td>
                       <a href="/classes/edit/{{class.id}}">Sửa</a> /
-                      <a href="#" class="delete" data-id="{{class.id}}">Xóa</a>
+                      <a href="#" class="delete" data-id="{{class.id}}">Xóa</a>/
+                      <a href="/classes/manager/{{class.id}}"
+                        >Quản lý Giáo Viên</a
+                      >
                     </td>
                   </tr>
                   {% endfor %}
@@ -184,7 +187,7 @@
 {% endblock %} {%block custom_script %}
 <script>
   // $(function () {
-  $("tbody.action a.delete").on("click", function (e) {
+  $("tbody a.delete").on("click", function (e) {
     let dataId = $(this).data("id");
     $.post("/classes/delete/" + dataId + "/1", function (data) {
       if (data.status == "faild") {

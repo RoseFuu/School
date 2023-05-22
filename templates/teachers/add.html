@@ -20,7 +20,7 @@
                   <h3 class="card-title">Giáo Viên</h3>
                 </div>
     
-                <form id="quickForm" novalidate="novalidate" method="POST">
+                <form id="quickForm" novalidate="novalidate" method="POST" enctype="multipart/form-data">
                   <div class="card-body">
                     {% if error %} 
                 <div id="toastsContainerTopRight" class="toasts-top-right fixed">
@@ -32,6 +32,7 @@
                     </div>
                 </div>
                 {% endif %}
+
     
                     <div class="form-group">
                       <label >Name</label>
@@ -138,6 +139,17 @@
                         
                           />
                       </div>
+                      
+                      <div class="form-group">
+                        <label for="exampleFormControlFile1">Chọn ảnh của bạn</label>
+                          <input
+                            type="file"
+                            class="form-control-file"
+                            name="file"
+                            id="exampleFormControlFile1"
+                          />
+                      </div>
+                      
                   </div>
     
                   <div class="card-footer">

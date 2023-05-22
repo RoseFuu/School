@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Log in</title>
+    <title>Register</title>
 
     <link
       rel="stylesheet"
@@ -36,22 +36,8 @@
 
       <div class="card">
         <div class="card-body login-card-body">
-          <p class="login-box-msg">Sign in to start your session</p>
-          <form action="" method="post">
-            {% if error %}
-            <div class="alert alert-info alert-dismissible">
-              <button
-                type="button"
-                class="close"
-                data-dismiss="alert"
-                aria-hidden="true"
-              >
-                ×
-              </button>
-              <h5><i class="icon fas fa-info"></i> Alert!</h5>
-              {{error}}
-            </div>
-            {% endif %}
+          <p class="login-box-msg">Register</p>
+          <form action="" method="POST">
             <div class="input-group mb-3">
               <input
                 type="text"
@@ -79,27 +65,13 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-8">
-                <div class="icheck-primary">
-                  <input type="checkbox" id="remember" />
-                  <label for="remember"> Remember Me </label>
-                </div>
-              </div>
-
-              <div class="col-4">
+              <div class="col-12">
                 <button type="submit" class="btn btn-primary btn-block">
-                  Sign In
+                  Register
                 </button>
               </div>
             </div>
           </form>
-
-          <p class="mb-1">
-            <a href="forgot-password.html">I forgot my password</a>
-          </p>
-          <p class="mb-0">
-            <a href="register" class="text-center">Register a new membership</a>
-          </p>
         </div>
       </div>
     </div>
