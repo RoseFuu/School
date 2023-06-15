@@ -61,7 +61,7 @@ def add_student():
                 error = "Sai Format Telephone Xin Hãy Nhập Lại"
         if 'file' not in request.files:
             flash('No file part')
-            return redirect(request.url)
+            return redirect("/students")
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -110,8 +110,8 @@ def edit_student(id_student):
             file = request.files['file']
             print(data_file['img'])
             if file and allowed_file(file.filename):
-                if data_file['img'] != "" and os.path.exists('C:\Projects\School\\static\\uploads\\' + data_file['img']) :
-                    os.remove('C:\Projects\School\\static\\uploads\\' + data_file['img'])
+                if str(data_file['img']) != "" and os.path.exists('C:\\Projects\\School\\static\\uploads\\' + str(data_file['img'])) :
+                    os.remove('C:\\Projects\\School\\static\\uploads\\' + str(data_file['img']))
                 filename = secure_filename(file.filename)
             full_path = os.path.join('C:\Projects\School',
                                      'static', 'uploads', filename)

@@ -61,7 +61,7 @@ def add_student():
                 error = "Sai Format Telephone Xin Hãy Nhập Lại"
         if 'file' not in request.files:
             flash('No file part')
-            return redirect(request.url)
+            return redirect("/teachers")
         file = request.files['file']
         filename = ''
         if file and allowed_file(file.filename):
@@ -111,7 +111,6 @@ def edit_student(id_teacher):
             data_file = conn.execute(sqlCheckFile).fetchone()
             filename = data_file['img']
             file = request.files['file']
-            print(data_file['id'])
             if file and allowed_file(file.filename):
                 if filename != '' and os.path.exists('C:\\Projects\\School\\static\\uploads\\'+filename):
                     os.remove(os.path.join('C:\Projects\School',
